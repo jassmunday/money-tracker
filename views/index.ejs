@@ -1,0 +1,31 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Tracker</title>
+  <!-- Add Bootstrap CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">Money Tracker</h1>
+    <a class="btn btn-primary mb-3" href="/transactions/new">New Transaction</a>
+    <ul class="list-group">
+      <% transactions.forEach(transaction => { %>
+        <li class="list-group-item">
+          <h2 class="mb-1"><%= transaction.title %></h2>
+          <p class="mb-1">Amount: <%= transaction.amount %></p>
+          <p class="mb-1">Date: <%= transaction.date.toDateString() %></p>
+          <form action="/transactions/<%= transaction._id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+  <!-- Add Bootstrap JS CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
